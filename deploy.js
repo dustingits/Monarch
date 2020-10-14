@@ -3,7 +3,7 @@ var path, node_ssh, ssh, fs;
 fs = require('fs');
 path = require('path');
 node_ssh = require('node-ssh');
-ssh = new node_ssh();
+ssh =  new node_ssh();
 
 // the method that starts the deployment process
 function main() {
