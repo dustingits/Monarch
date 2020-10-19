@@ -1,10 +1,10 @@
-const {NodeSSH} = require('node-ssh')
+const { NodeSSH } = require('node-ssh')
 var cmd = require('node-cmd');
 var path, node_ssh, ssh, fs;
 fs = require('fs');
 path = require('path');
 node_ssh = require('node-ssh');
-ssh =  new NodeSSH();   
+ssh = new NodeSSH();
 
 // the method that starts the deployment process
 function main() {
@@ -16,7 +16,7 @@ function main() {
 function installPM2() {
   return ssh.execCommand(
     'sudo npm install pm2 -g', {
-      cwd: '/home/ubuntu'
+    cwd: '/home/ubuntu'
   });
 }
 
@@ -28,13 +28,13 @@ function transferProjectToRemote(failed, successful) {
     {
       recursive: true,
       concurrency: 1,
-      validate: function(itemPath) {
+      validate: function (itemPath) {
         const baseName = path.basename(itemPath);
         return (
           baseName.substr(0, 1) !== '.' && baseName !== 'node_modules' // do not allow dot files
         ); // do not allow node_modules
       },
-      tick: function(localPath, remotePath, error) {
+      tick: function (localPath, remotePath, error) {
         if (error) {
           failed.push(localPath);
           console.log('failed.push: ' + localPath);
@@ -51,7 +51,7 @@ function transferProjectToRemote(failed, successful) {
 function createRemoteTempFolder() {
   return ssh.execCommand(
     'rm -rf Monarch-temp && mkdir Monarch-temp', {
-      cwd: '/home/ubuntu'
+    cwd: '/home/ubuntu'
   });
 }
 
@@ -59,7 +59,7 @@ function createRemoteTempFolder() {
 function stopRemoteServices() {
   return ssh.execCommand(
     'pm2 stop all && sudo service mongod stop', {
-      cwd: '/home/ubuntu'
+    cwd: '/home/ubuntu'
   });
 }
 
@@ -67,7 +67,7 @@ function stopRemoteServices() {
 function updateRemoteApp() {
   return ssh.execCommand(
     'mkdir Monarch && cp -r Monarch-temp/* Monarch/ && rm -rf Monarch-temp', {
-      cwd: '/home/ubuntu'
+    cwd: '/home/ubuntu'
   });
 }
 
@@ -75,7 +75,7 @@ function updateRemoteApp() {
 function restartRemoteServices() {
   return ssh.execCommand(
     'cd Monarch && sudo service mongod start && pm2 start app.js', {
-      cwd: '/home/ubuntu'
+    cwd: '/home/ubuntu'
   });
 }
 
@@ -86,20 +86,20 @@ function sshConnect() {
   ssh
     .connect({
       // TODO: ADD YOUR IP ADDRESS BELOW (e.g. '12.34.5.67')
-      host: '3.14.248.214',
+      host: '18.191.229.171',
       username: 'ubuntu',
       privateKey: 'Monarch-key.pem'
     })
-    .then(function() {
+    .then(function () {
       console.log('SSH Connection established.');
       console.log('Installing PM2...');
       return installPM2();
     })
-    .then(function() {
+    .then(function () {
       console.log('Creating `Monarch-temp` folder.');
       return createRemoteTempFolder();
     })
-    .then(function(result) {
+    .then(function (result) {
       const failed = [];
       const successful = [];
       if (result.stdout) {
@@ -112,7 +112,7 @@ function sshConnect() {
       console.log('Transferring files to remote server...');
       return transferProjectToRemote(failed, successful);
     })
-    .then(function(status) {
+    .then(function (status) {
       if (status) {
         console.log('Stopping remote services.');
         return stopRemoteServices();
@@ -120,7 +120,7 @@ function sshConnect() {
         return Promise.reject(failed.join(', '));
       }
     })
-    .then(function(status) {
+    .then(function (status) {
       if (status) {
         console.log('Updating remote app.');
         return updateRemoteApp();
@@ -128,7 +128,7 @@ function sshConnect() {
         return Promise.reject(failed.join(', '));
       }
     })
-    .then(function(status) {
+    .then(function (status) {
       if (status) {
         console.log('Restarting remote services...');
         return restartRemoteServices();
@@ -136,7 +136,7 @@ function sshConnect() {
         return Promise.reject(failed.join(', '));
       }
     })
-    .then(function() {
+    .then(function () {
       console.log('DEPLOYMENT COMPLETE!');
       process.exit(0);
     })
