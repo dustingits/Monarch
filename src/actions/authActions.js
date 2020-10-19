@@ -3,28 +3,28 @@ import { returnErrors } from './errorActions';
 
 //use getState() to pull in token and set headers
 
-export const loadUser = () =>  (dispatch, getState) => {
+export const loadUser = () => (dispatch, getState) => {
     // User loading
-    
+
     dispatch({ type: 'USER_LOADING' });
-        
+
     axios.get('http://localhost:3001/users/user', tokenConfig(getState))
-        .then( res => 
+        .then(res =>
             dispatch({
                 type: 'USER_LOADED',
                 payload: res
             })
         )
-        .catch(err =>{
+        .catch(err => {
             if (err.response && err.response.data) {
                 dispatch(returnErrors(err.response.data, err.response.status));
                 dispatch({
                     type: 'AUTH_ERROR'
                 });
-            }else{
+            } else {
                 console.log(err);
             }
-        
+
         })
 }
 
@@ -43,8 +43,8 @@ export const signUpUser = ({ username, email, password }) => (
     const body = JSON.stringify({ username, email, password });
 
     axios
-        .post('http://localhost:3001/auth/signup', body, config)
-        .then(res => 
+        .post('http://18.191.229.171:3001/auth/signup', body, config)
+        .then(res =>
             dispatch({
                 type: 'REGISTER_SUCCESS',
                 payload: res.data
@@ -64,37 +64,37 @@ export const signUpUser = ({ username, email, password }) => (
 // Login User
 export const loginUser = ({ email, password }) => (
     dispatch
-  ) => {
+) => {
     // Headers
     const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
+        headers: {
+            'Content-Type': 'application/json'
+        }
     };
-  
+
     // Request body
     const body = JSON.stringify({ email, password });
-  
+
     axios
-      .post('http://localhost:3001/auth/login', body, config)
-      .then(res =>
-        dispatch({
-          type: 'LOGIN_SUCCESS',
-          payload: res.data
-        })
-      )
-      .catch(err => {
-        if (err.response && err.response.data) {
-            dispatch(returnErrors(err.response.data, err.response.status));
+        .post('http://18.191.229.171:3001/auth/login', body, config)
+        .then(res =>
             dispatch({
-                type: 'LOGIN_ERROR'
-            });
-        }else{
-            alert(err);
-        }
-      });
+                type: 'LOGIN_SUCCESS',
+                payload: res.data
+            })
+        )
+        .catch(err => {
+            if (err.response && err.response.data) {
+                dispatch(returnErrors(err.response.data, err.response.status));
+                dispatch({
+                    type: 'LOGIN_ERROR'
+                });
+            } else {
+                alert(err);
+            }
+        });
 };
-  
+
 
 // Logout User
 export const logout = () => {
