@@ -66,7 +66,7 @@ function stopRemoteServices() {
 // updates the project source on the server
 function updateRemoteApp() {
   return ssh.execCommand(
-    'mkdir Monarch && cp -r Monarch-temp/* Monarch/ && rm -rf Monarch-temp', {
+    'cp -r Monarch-temp/ Monarch/ && rm -rf Monarch-temp', {
     cwd: '/home/ubuntu'
   });
 }
