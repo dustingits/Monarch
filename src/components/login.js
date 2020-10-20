@@ -1,9 +1,9 @@
 import React from "react";
 import { loginUser } from '../actions/authActions';
 import { clearErrors } from '../actions/errorActions';
-import { MDBContainer,MDBAlert, MDBRow, MDBCardBody, MDBCol, MDBBtn, MDBInput, MDBCard} from 'mdbreact';
+import { MDBContainer, MDBAlert, MDBRow, MDBCardBody, MDBCol, MDBBtn, MDBInput, MDBCard } from 'mdbreact';
 import { connect } from 'react-redux';
-import {Link,Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -51,15 +51,15 @@ class LogIn extends React.Component {
     }
     // redirect to profile after login
     this.props.loginUser(user);
-    if (this.props.isAuthenticated & !this.props.isLoading){
+    if (this.props.isAuthenticated & !this.props.isLoading) {
       this.props.history.push('/profile')
     }
   }
   render() {
     const errmsg = this.props.errors.msg.error;
     // if authenticated redirect to profile
-    if(this.props.isAuthenticated){
-      return(<Redirect to='/profile'/>)
+    if (this.props.isAuthenticated) {
+      return (<Redirect to='/profile' />)
     }
     return (
       <MDBContainer fluid id="login">
@@ -67,8 +67,9 @@ class LogIn extends React.Component {
         {errmsg ? <MDBAlert color="danger">{errmsg}</MDBAlert> : null}
         <MDBRow center>
           <MDBCol md="4">
-            <MDBCard id="loginCard" style={{ margin:"3em", width: "22rem" }}>
+            <MDBCard id="loginCard" style={{ margin: "3em", width: "22rem" }}>
               <MDBCardBody >
+                new update
                 <form>
                   <p id="loginHeader" className="h5 text-center mb-4">Log In</p>
                   <div className="grey-text">
@@ -77,12 +78,12 @@ class LogIn extends React.Component {
                     <MDBInput onChange={this.onChangePassword} label="Password" icon="lock" group type="password" validate />
                   </div>
                   <div className="text-center">
-                    <MDBBtn id="loginBtn"onClick={this.handleSubmit} color="default">Log In</MDBBtn>
+                    <MDBBtn id="loginBtn" onClick={this.handleSubmit} color="default">Log In</MDBBtn>
                   </div>
                 </form>
                 <div className="d-flex justify-content-center pt-2">
                   <Link to="/signup">Don't have an account?</Link>
-                  </div>
+                </div>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
