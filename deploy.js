@@ -23,7 +23,7 @@ function installPM2() {
 // transfers local project to the remote server
 function transferProjectToRemote(failed, successful) {
   return ssh.putDirectory(
-    '/Monarch',
+    '../Monarch',
     '/home/ubuntu/Monarch-temp',
     {
       recursive: true,
