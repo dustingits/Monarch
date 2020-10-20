@@ -20,7 +20,7 @@ import { returnErrors } from './errorActions';
 export const updateProfile = (profile) => (dispatch, getState) => {
 
     axios
-        .put('http://localhost:3001/users/updateprofile', profile, tokenConfig(getState))
+        .put('18.191.229.171:3001/users/updateprofile', profile, tokenConfig(getState))
         .then(res =>
             // response includes a new user object with a userId matching the one provided
             dispatch({
@@ -48,9 +48,9 @@ export const updateProfile = (profile) => (dispatch, getState) => {
 */
 export const followMember = (followIds) => (dispatch, getState) => {
     console.log(followIds);
-    axios.put('http://localhost:3001/users/follow', followIds, tokenConfig(getState))
-        
-        .then( res =>
+    axios.put('18.191.229.171:3001/users/follow', followIds, tokenConfig(getState))
+
+        .then(res =>
             // response contains an entire new object for the user and the member they followed. {user{}, follwed:{}}
             dispatch({
                 type: 'MEMBER_FOLLOWED',
@@ -63,10 +63,10 @@ export const followMember = (followIds) => (dispatch, getState) => {
                 dispatch({
                     type: 'FOLLOW_ERROR'
                 });
-            }else{
+            } else {
                 console.log(err);
             }
-        })   
+        })
 };
 
 /*  @@ UNFOLLOW MEMBER 
@@ -80,9 +80,9 @@ export const followMember = (followIds) => (dispatch, getState) => {
 */
 export const unfollowMember = (unfollowIds) => (dispatch, getState) => {
     console.log(unfollowIds)
-    axios.put('http://localhost:3001/users/unfollow', unfollowIds, tokenConfig(getState))
-        
-        .then( res =>
+    axios.put('18.191.229.171:3001/users/unfollow', unfollowIds, tokenConfig(getState))
+
+        .then(res =>
             // response contains an entire new object for the user and the member they unfollowed. {user{}, unfollwed:{}}
             dispatch({
                 type: 'MEMBER_UNFOLLOWED',
@@ -95,10 +95,10 @@ export const unfollowMember = (unfollowIds) => (dispatch, getState) => {
                 dispatch({
                     type: 'UNFOLLOW_ERROR'
                 });
-            }else{
+            } else {
                 console.log(err);
             }
-        })   
+        })
 };
 
 
@@ -107,29 +107,29 @@ export const unfollowMember = (unfollowIds) => (dispatch, getState) => {
     loadCommunity fetchs all other user object other than the user who is logged in.
      
 */
-export const loadCommunity = () =>  (dispatch, getState) => {
-    
-    
+export const loadCommunity = () => (dispatch, getState) => {
+
+
     dispatch({ type: 'COMMUNITY_LOADING' });
-        
-    axios.get('http://localhost:3001/users/user', tokenConfig(getState))
-        .then( res => 
+
+    axios.get('18.191.229.171:3001/users/user', tokenConfig(getState))
+        .then(res =>
             // response is an object with property  {members:} which contains an array of user obejects. {members:[{user},{user}]}
             dispatch({
                 type: 'COMMUNITY_LOADED',
                 payload: res
             })
         )
-        .catch(err =>{
+        .catch(err => {
             if (err.response && err.response.data) {
                 dispatch(returnErrors(err.response.data, err.response.status));
                 dispatch({
                     type: 'AUTH_ERROR'
                 });
-            }else{
+            } else {
                 console.log(err);
             }
-        
+
         })
 }
 
@@ -139,29 +139,29 @@ export const loadCommunity = () =>  (dispatch, getState) => {
     {user._id} of the user you wish to retrieve is passed into the request url as params.
 */
 
-export const getMemberProfile = (id) =>  (dispatch, getState) => {
-    
-    
+export const getMemberProfile = (id) => (dispatch, getState) => {
+
+
     dispatch({ type: 'MEMBER_LOADING' });
-        
-    axios.get('http://localhost:3001/users/user/' + id, tokenConfig(getState))
-        .then( res => 
+
+    axios.get('18.191.229.171:3001/users/user/' + id, tokenConfig(getState))
+        .then(res =>
             // response is a user object matching the ID provided
             dispatch({
                 type: 'MEMBER_PROFILE_LOADED',
                 payload: res
             })
         )
-        .catch(err =>{
+        .catch(err => {
             if (err.response && err.response.data) {
                 dispatch(returnErrors(err.response.data, err.response.status));
                 dispatch({
                     type: 'AUTH_ERROR'
                 });
-            }else{
+            } else {
                 console.log(err);
             }
-        
+
         })
 }
 
@@ -172,21 +172,21 @@ export const getMemberProfile = (id) =>  (dispatch, getState) => {
     to the current user who is logged in.
    
 */
-export const getUserProfile = () =>  (dispatch, getState) => {
-        try{
+export const getUserProfile = () => (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'USER_PROFILE_LOADED',
+
+        })
+    } catch (err) {
+        if (err.response && err.response.data) {
+            dispatch(returnErrors(err.response.data, err.response.status));
             dispatch({
-                type: 'USER_PROFILE_LOADED',
-                
-            })
-        }catch(err){
-            if (err.response && err.response.data) {
-                dispatch(returnErrors(err.response.data, err.response.status));
-                dispatch({
-                    type: 'AUTH_ERROR'
-                });
-            }else{
-                console.log(err);
-            }
-        
+                type: 'AUTH_ERROR'
+            });
+        } else {
+            console.log(err);
         }
+
+    }
 }
