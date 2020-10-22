@@ -16,7 +16,7 @@ export const createPost = (post) => (dispatch, getState) => {
     dispatch({ type: 'POST_CREATE_LOADING' })
 
     axios
-        .post('http://localhost:3001/posts/createpost', post, tokenConfig(getState))
+        .post('http://18.191.229.171:3001/posts/createpost', post, tokenConfig(getState))
         .then(res =>
             dispatch({
                 type: 'POST_CREATED',
@@ -47,7 +47,7 @@ export const createPost = (post) => (dispatch, getState) => {
 export const createComment = (comment) => (dispatch, getState) => {
     dispatch({ type: 'CREATE_COMMENT_LOADING' })
     axios
-        .put('http://localhost:3001/posts/comment', comment, tokenConfig(getState))
+        .put('http://18.191.229.171:3001/posts/comment', comment, tokenConfig(getState))
         .then(res =>
             // response includes entire post based on postId provided
             dispatch({
@@ -77,7 +77,7 @@ export const createComment = (comment) => (dispatch, getState) => {
 export const deleteComment = (comment) => (dispatch, getState) => {
     dispatch({ type: 'DELETE_COMMENT_LOADING' })
     axios
-        .put('http://localhost:3001/posts/deleteComment', comment, tokenConfig(getState))
+        .put('http://18.191.229.171:3001/posts/deleteComment', comment, tokenConfig(getState))
         .then(res =>
             // resonse will be entire post based on the postId provided.
             dispatch({
@@ -106,7 +106,7 @@ export const deleteComment = (comment) => (dispatch, getState) => {
 export const deletePost = (id) => (dispatch, getState) => {
     dispatch({ type: 'DELETE_POST_LOADING' })
     axios
-        .delete('http://localhost:3001/posts/' + id, tokenConfig(getState))
+        .delete('http://18.191.229.171:3001/posts/' + id, tokenConfig(getState))
         .then(res =>
             // response returns nothing so we pass the original postId parameter to the reducer
             dispatch({
@@ -142,7 +142,7 @@ export const deletePost = (id) => (dispatch, getState) => {
 export const editPost = (post) => (dispatch, getState) => {
     dispatch({ type: 'EDIT_POST_LOADING' })
     axios
-        .put('http://localhost:3001/posts/editpost', post, tokenConfig(getState))
+        .put('http://18.191.229.171:3001/posts/editpost', post, tokenConfig(getState))
         .then(res =>
             // response includes a replacement post of the same postId provided
             dispatch({
@@ -173,7 +173,7 @@ export const editPost = (post) => (dispatch, getState) => {
 export const likePost = (postId) => (dispatch, getState) => {
     dispatch({ type: 'LIKE_POST_LOADING' })
     axios
-        .put('http://localhost:3001/posts/like', postId, tokenConfig(getState))
+        .put('http://18.191.229.171:3001/posts/like', postId, tokenConfig(getState))
         .then(res =>
             // response includes an entire replacement post object of the postId provided
             dispatch({
@@ -203,7 +203,7 @@ export const likePost = (postId) => (dispatch, getState) => {
 export const unlikePost = (postId) => (dispatch, getState) => {
     dispatch({ type: 'UNLIKE_POST_LOADING' })
     axios
-        .put('http://localhost:3001/posts/unlike', postId, tokenConfig(getState))
+        .put('http://18.191.229.171:3001/posts/unlike', postId, tokenConfig(getState))
         .then(res =>
             // response includes an entire post object matching the postId provided
             dispatch({
@@ -231,7 +231,7 @@ export const unlikePost = (postId) => (dispatch, getState) => {
 export const loadPosts = () => (dispatch, getState) => {
     dispatch({ type: 'POST_LOADING' });
     axios
-        .get('http://localhost:3001/posts/posts', tokenConfig(getState))
+        .get('http://18.191.229.171:3001/posts/posts', tokenConfig(getState))
         .then(res =>
             // response is an array of post objects sorted by date desc.
             dispatch({

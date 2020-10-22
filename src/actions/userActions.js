@@ -20,7 +20,7 @@ import { returnErrors } from './errorActions';
 export const updateProfile = (profile) => (dispatch, getState) => {
 
     axios
-        .put('http://localhost:3001/users/updateprofile', profile, tokenConfig(getState))
+        .put('http://18.191.229.171:3001/users/updateprofile', profile, tokenConfig(getState))
         .then(res =>
             // response includes a new user object with a userId matching the one provided
             dispatch({
@@ -48,7 +48,7 @@ export const updateProfile = (profile) => (dispatch, getState) => {
 */
 export const followMember = (followIds) => (dispatch, getState) => {
     console.log(followIds);
-    axios.put('http://localhost:3001/users/follow', followIds, tokenConfig(getState))
+    axios.put('http://18.191.229.171:3001/users/follow', followIds, tokenConfig(getState))
 
         .then(res =>
             // response contains an entire new object for the user and the member they followed. {user{}, follwed:{}}
@@ -80,7 +80,7 @@ export const followMember = (followIds) => (dispatch, getState) => {
 */
 export const unfollowMember = (unfollowIds) => (dispatch, getState) => {
     console.log(unfollowIds)
-    axios.put('http://localhost:3001/users/unfollow', unfollowIds, tokenConfig(getState))
+    axios.put('http://18.191.229.171:3001/users/unfollow', unfollowIds, tokenConfig(getState))
 
         .then(res =>
             // response contains an entire new object for the user and the member they unfollowed. {user{}, unfollwed:{}}
@@ -112,7 +112,7 @@ export const loadCommunity = () => (dispatch, getState) => {
 
     dispatch({ type: 'COMMUNITY_LOADING' });
 
-    axios.get('http://localhost:3001/users/user', tokenConfig(getState))
+    axios.get('http://18.191.229.171:3001/users/user', tokenConfig(getState))
         .then(res =>
             // response is an object with property  {members:} which contains an array of user obejects. {members:[{user},{user}]}
             dispatch({
@@ -144,7 +144,7 @@ export const getMemberProfile = (id) => (dispatch, getState) => {
 
     dispatch({ type: 'MEMBER_LOADING' });
 
-    axios.get('http://localhost:3001/users/user/' + id, tokenConfig(getState))
+    axios.get('http://18.191.229.171:3001/users/user/' + id, tokenConfig(getState))
         .then(res =>
             // response is a user object matching the ID provided
             dispatch({
