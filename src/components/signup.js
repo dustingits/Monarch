@@ -3,8 +3,8 @@ import { MDBContainer, MDBRow, MDBAlert, MDBCardBody, MDBCol, MDBBtn, MDBInput, 
 import { connect } from 'react-redux';
 import { signUpUser } from '../actions/authActions';
 import { clearErrors } from '../actions/errorActions';
-import {Redirect} from 'react-router';
-import {Link} from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 class SignUp extends Component {
 
   constructor(props) {
@@ -72,17 +72,17 @@ class SignUp extends Component {
       email: this.state.email,
       password: this.state.password,
     }
-    this.props.signUpUser(signup) 
-    
+    this.props.signUpUser(signup)
+
   }
 
 
   render() {
     const errmsg = this.props.errors.msg.error;
-    if (this.props.isAuthenticated){
-      return (<Redirect to='/profile'/>)
+    if (this.props.isAuthenticated) {
+      return (<Redirect to='/profile' />)
     }
-  
+
     return (
 
 
@@ -90,7 +90,7 @@ class SignUp extends Component {
         {errmsg ? <MDBAlert color="danger">{errmsg}</MDBAlert> : null}
         <MDBRow center>
           <MDBCol md="4">
-            <MDBCard id="loginCard"style={{ width: "22rem" }}>
+            <MDBCard id="loginCard" style={{ width: "22rem" }}>
               <MDBCardBody id="loginCard" >
                 <form>
                   <p id="loginHeader" className="h5 text-center mb-4">Sign up</p>
@@ -111,10 +111,10 @@ class SignUp extends Component {
                 </form>
                 <div className="d-flex justify-content-center pt-2">
                   <Link to="/login">Already have an account?</Link>
-                  </div>
+                </div>
               </MDBCardBody>
             </MDBCard>
-           
+
           </MDBCol>
         </MDBRow>
       </MDBContainer>

@@ -3,10 +3,10 @@ import '../css/profile.css';
 import { connect } from 'react-redux';
 import MyPostsList from './myPostsList';
 import { Redirect } from 'react-router';
-import {  MDBCol, MDBBadge, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
+import { MDBCol, MDBBadge, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink } from "mdbreact";
 import UpdateProfileModal from './updateProfileModal';
 import CommunityList from "./communityList";
-import { loadCommunity, followMember,unfollowMember } from '../actions/userActions';
+import { loadCommunity, followMember, unfollowMember } from '../actions/userActions';
 import { createComment, loadPosts } from '../actions/postActions';
 import { loadUser } from '../actions/authActions';
 import OtherPostsList from './otherPostsList';
@@ -22,7 +22,7 @@ class Profile extends React.Component {
             active: "user"
         }
     }
-    componentDidMount() {
+    componentWillMount() {
         this.props.loadPosts();
 
 
@@ -63,8 +63,8 @@ class Profile extends React.Component {
                     <div className="row">
                         <div className="col-md-3 col-12 profileThumb">
 
-                            
-                            <img src={ this.props.active === 'user'? this.props.user.picture : this.props.member.picture} className="rounded-circle avatar-xl img-thumbnail " id="profile-thumbnail" alt="profile" />
+
+                            <img src={this.props.active === 'user' ? this.props.user.picture : this.props.member.picture} className="rounded-circle avatar-xl img-thumbnail " id="profile-thumbnail" alt="profile" />
                         </div>
 
                         <div id="profilePlate" className="col profilePlate">
@@ -75,8 +75,8 @@ class Profile extends React.Component {
                                             :
                                             this.props.member.username}
                                     </h3>
-                                    </div>
-                                    <div className="col">
+                                </div>
+                                <div className="col">
                                     <div className="row">
                                         <div className="col following">
 
@@ -96,7 +96,7 @@ class Profile extends React.Component {
                                         <div className="col followers">Followers</div>
                                     </div>
 
-                                
+
                                 </div>
                             </div>
                             <div className="row">
@@ -113,7 +113,7 @@ class Profile extends React.Component {
                                             <MDBBadge key={index} pill id="categoryPill" className="mx-2" >{category}</MDBBadge>))}
                                         </div>}
                                 </div>
-                                
+
                             </div>
                             <div className="row">
                                 <div className="col plateBio">
@@ -153,7 +153,7 @@ class Profile extends React.Component {
 
                         </div>
                     </div>
-                   
+
 
                     <div id="tabcontent" className="row justify-content-center">
                         <MDBCol className="col-10 col-sm-12 ">
@@ -213,4 +213,4 @@ function mapStateToProps(state) {
         posts: state.posts.posts
     };
 }
-export default connect(mapStateToProps, { loadPosts, loadCommunity, createComment, loadUser, followMember,unfollowMember})(Profile);
+export default connect(mapStateToProps, { loadPosts, loadCommunity, createComment, loadUser, followMember, unfollowMember })(Profile);

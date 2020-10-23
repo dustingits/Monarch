@@ -13,6 +13,11 @@ const containerStyle = {
 const options = {
 	styles: mapStyle,
 };
+const center = {
+	lat: 30.9843,
+	lng: -91.9623
+
+}
 
 export default class MonarchMap extends Component {
 	state = {
@@ -29,7 +34,7 @@ export default class MonarchMap extends Component {
 		return (
 			<GoogleMap
 				mapContainerStyle={containerStyle}
-				center={this.props.user.location}
+				center={this.props.user.location ? this.props.user.location : center}
 				zoom={8}
 				options={options}>
 				{/* insert Marker for each member with a location */}
@@ -88,7 +93,7 @@ export default class MonarchMap extends Component {
 									<MDBBtn
 										onClick={() =>
 											/* unfollowMember is an external  axios function that DELETES the member's Id from 
-                      user's following[] AND the user's Id from the member's followers[] */
+					  user's following[] AND the user's Id from the member's followers[] */
 											this.props.unfollowMember({
 												unfollowIds: {
 													unfollowId: this.state.selected._id,
@@ -103,28 +108,28 @@ export default class MonarchMap extends Component {
 										Unfollow
 									</MDBBtn>
 								) : (
-									/* else the user's following[] does not contain this member Id so display FOLLOW btn */
-									<MDBBtn
-										onClick={() =>
-											/* followMember is an external  axios function that PUTS the member's Id into 
-                      user's following[] AND the user's Id into the member's followers[] */
-											this.props.followMember({
-												followIds: { followId: this.state.selected._id, _id: this.props.user._id },
-											})
-										}
-										outline
-										id='editProfileBtn'
-										color='default'>
-                    {/* Inside of unfollow Btn */}
-										<MDBIcon icon='plus' id='follow-icon' className='mr-1' />
+										/* else the user's following[] does not contain this member Id so display FOLLOW btn */
+										<MDBBtn
+											onClick={() =>
+												/* followMember is an external  axios function that PUTS the member's Id into 
+						  user's following[] AND the user's Id into the member's followers[] */
+												this.props.followMember({
+													followIds: { followId: this.state.selected._id, _id: this.props.user._id },
+												})
+											}
+											outline
+											id='editProfileBtn'
+											color='default'>
+											{/* Inside of unfollow Btn */}
+											<MDBIcon icon='plus' id='follow-icon' className='mr-1' />
 										Follow
-									</MDBBtn>
-                // close conditional statement
-								)}
+										</MDBBtn>
+										// close conditional statement
+									)}
 							</div>
 						</div>
 					</InfoWindow>
-        //if this.state.selected is falsey display null
+					//if this.state.selected is falsey display null
 				) : null}
 				<></>]
 			</GoogleMap>

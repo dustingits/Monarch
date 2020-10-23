@@ -27,13 +27,13 @@ class UpdateProfileModal extends Component {
       instagram: this.props.user.instagram,
       aboutme: this.props.user.aboutme,
       picture: this.props.user.picture,
-      location:{
-        address:"",
-          lat: this.props.user.location.lat,
-          lng: this.props.user.location.lng
+      location: {
+        address: "",
+        lat: this.props.user.location.lat,
+        lng: this.props.user.location.lng
       },
       openProfileModal: false,
-      categories:[]
+      categories: []
 
     }
 
@@ -77,7 +77,7 @@ class UpdateProfileModal extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    if (this.state.categories === null){
+    if (this.state.categories === null) {
       this.setState({
         categories: this.props.user.categories
       })
@@ -97,28 +97,28 @@ class UpdateProfileModal extends Component {
     }
     this.props.updateProfile(profile);
     this.setState({
-      categories:[]
+      categories: []
     });
     this.toggleModal();
 
-    
+
 
   }
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getCoords,this.handleError);
+      navigator.geolocation.getCurrentPosition(this.getCoords, this.handleError);
     } else {
-       alert("Geolocation is not supported by this browser.");
+      alert("Geolocation is not supported by this browser.");
     }
   }
-  getCoords(position){
+  getCoords(position) {
     this.setState({
-      location:{lat:position.coords.latitude,lng:position.coords.longitude}
+      location: { lat: position.coords.latitude, lng: position.coords.longitude }
     })
     console.log(this.state.location)
   }
   handleError(error) {
-    switch(error.code) {
+    switch (error.code) {
       case error.PERMISSION_DENIED:
         alert("User denied the request for Geolocation.")
         break;
@@ -132,7 +132,7 @@ class UpdateProfileModal extends Component {
         alert("An unknown error occurred.")
         break;
       default:
-      alert("an Error has occured")
+        alert("an Error has occured")
     }
   }
   toggleModal() {
@@ -141,30 +141,30 @@ class UpdateProfileModal extends Component {
     })
 
   }
-  onCheck(e){ 
-  const categories = this.state.categories
-  let index
+  onCheck(e) {
+    const categories = this.state.categories
+    let index
 
-  // check if the check box is checked or unchecked
-  if (e.target.checked) {
-    // add the numerical value of the checkbox to options array
-    categories.push(e.target.value)
-  } else {
-    // or remove the value from the unchecked checkbox from the array
-    index = categories.indexOf(e.target.value)
-    categories.splice(index, 1)
-  }
+    // check if the check box is checked or unchecked
+    if (e.target.checked) {
+      // add the numerical value of the checkbox to options array
+      categories.push(e.target.value)
+    } else {
+      // or remove the value from the unchecked checkbox from the array
+      index = categories.indexOf(e.target.value)
+      categories.splice(index, 1)
+    }
 
-  // update the state with the new array of options
-  this.setState({ categories: categories })
+    // update the state with the new array of options
+    this.setState({ categories: categories })
     console.log(categories)
-    
+
   }
   render() {
     return (
       <MDBContainer>
-        <MDBBtn id="editProfileBtn"onClick={this.toggleModal} outline color="info">
-          <MDBIcon  icon="cog" id="follow-icon" className="mr-1" />Edit
+        <MDBBtn id="editProfileBtn" onClick={this.toggleModal} outline color="info">
+          <MDBIcon icon="cog" id="follow-icon" className="mr-1" />Edit
         </MDBBtn>
         <MDBModal size='lg' isOpen={this.state.openProfileModal} toggle={this.toggleModal}>
           <MDBModalHeader toggle={this.toggleModal}>Update your profile</MDBModalHeader>
@@ -177,7 +177,10 @@ class UpdateProfileModal extends Component {
                     <div>
                       {this.props.categories.map((category, index) => (
                         <label className="" key={index}>
-                          <input className="mx-1"type="checkbox" onChange={this.onCheck} value={category} >
+                          <input className="mx-1" type="checkbox" onChange={this.onCheck}
+                            checked={this.props.user.categories.map(c => c === category ? true : false
+                            )}
+                            value={category} >
                           </input>
                           {category}
                         </label>
@@ -185,8 +188,8 @@ class UpdateProfileModal extends Component {
                     </div>
                   </form>
                   <div className="mt-4">
-                  <MDBBtn id="editBtn" onClick={this.getLocation}>
-                  <MDBIcon far icon="compass" size="2x" /><br></br> Set Location
+                    <MDBBtn id="editBtn" onClick={this.getLocation}>
+                      <MDBIcon far icon="compass" size="2x" /><br></br> Set Location
                   </MDBBtn>
                   </div>
 
@@ -213,7 +216,7 @@ class UpdateProfileModal extends Component {
             </MDBRow>
           </MDBModalBody>
           <MDBModalFooter>
-            <MDBBtn  id="deleteBtn" onClick={this.toggleModal}>Cancel</MDBBtn>
+            <MDBBtn id="deleteBtn" onClick={this.toggleModal}>Cancel</MDBBtn>
             <MDBBtn id="editBtn" onClick={this.onSubmit}>Save changes</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
