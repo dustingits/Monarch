@@ -15,7 +15,7 @@ PROPS: member={member to be displayed}
 */
 const Member = (props) => (
 	// container row / col for member card
-	<MDBRow center className='my-3 align-middle' style={{ height: '100px' }}>
+	<MDBRow center className='my-3 align-middle' >
 		<MDBCol style={{ maxWidth: '45rem' }}>
 			{/* container Row for member card content*/}
 			<MDBCard className='memberCard d-flex'>
@@ -27,7 +27,7 @@ const Member = (props) => (
 						alt='profile'
 					/>
 				</div>
-		 		{/* col 2/3  that displays username - email - and categories on seperate rows */}
+				{/* col 2/3  that displays username - email - and categories on seperate rows */}
 				<div className='m-auto col-5'>
 					{/* Link onClick triggers profile state change to the selected member */}
 					<Link to='#' id='memberLink' onClick={() => props.profile(props.member._id)}>
@@ -57,29 +57,29 @@ const Member = (props) => (
 								})
 							}
 							id='editBtn'>
-                            {/* Inside of unfollow Btn */}
+							{/* Inside of unfollow Btn */}
 							<MDBIcon icon='minus' id='unfollow-icon' className='mr-1' />
 							Unfollow
 						</MDBBtn>
-                    /* else the user's following[] does not contain this member Id so display FOLLOW btn */
+						/* else the user's following[] does not contain this member Id so display FOLLOW btn */
 					) : (
-						<MDBBtn
-                            onClick={() =>
-                                /* followMember is an external  axios function that PUTS the member's Id into user's following[] AND the user's Id into the member's followers[] */
-								props.followMember({
-									followIds: {
-										followId: props.member._id,
-										_id: props.user._id,
-									},
-								})
-							}
-							id='editProfileBtn'>
-                            {/* Inside of unfollow Btn */}
-							<MDBIcon icon='plus' id='follow-icon' className='mr-1' />
+							<MDBBtn
+								onClick={() =>
+									/* followMember is an external  axios function that PUTS the member's Id into user's following[] AND the user's Id into the member's followers[] */
+									props.followMember({
+										followIds: {
+											followId: props.member._id,
+											_id: props.user._id,
+										},
+									})
+								}
+								id='editProfileBtn'>
+								{/* Inside of unfollow Btn */}
+								<MDBIcon icon='plus' id='follow-icon' className='mr-1' />
 							Follow
-						</MDBBtn>
-                    // close conditional statement
-					)}
+							</MDBBtn>
+							// close conditional statement
+						)}
 				</div>
 			</MDBCard>
 		</MDBCol>
@@ -95,11 +95,11 @@ class CommunityList extends Component {
 			myId: this.props.user._id,
 			community: [...this.props.members],
 		};
-    }
-    componentDidMount(){
-        this.communityPopulate();
-    }
-    // Function triggered onMount and in component render
+	}
+	componentDidMount() {
+		this.communityPopulate();
+	}
+	// Function triggered onMount and in component render
 	communityPopulate() {
 		return this.state.community.map((member) => {
 			return (
@@ -113,30 +113,30 @@ class CommunityList extends Component {
 				/>
 			);
 		});
-    }
-    // Function triggered onChange of memberSearch input field
+	}
+	// Function triggered onChange of memberSearch input field
 	onSearch(e) {
-        // create lowercase query string from input value
-        const query = e.target.value.toLowerCase();
-        // create new [] of members based on query search
+		// create lowercase query string from input value
+		const query = e.target.value.toLowerCase();
+		// create new [] of members based on query search
 		const resCommunity = this.props.members.filter(
 			(e) => e.username.includes(query) || e.email.includes(query)
-        );
-        // set this.state.community to newly created resCommunity[] causing rerender of memberlist.
+		);
+		// set this.state.community to newly created resCommunity[] causing rerender of memberlist.
 		this.setState({
 			community: resCommunity,
 		});
 	}
 	render() {
 		return (
-            /* container row/col for entire list of members */
+			/* container row/col for entire list of members */
 			<div id='post-list-container'>
 				<MDBCol md='6'>
 					<form className='form-inline mt-4 mb-4'>
 						<MDBIcon icon='search' />
 						<input
-                            id="memberSearch"
-                            name="memberSearch"
+							id="memberSearch"
+							name="memberSearch"
 							onChange={this.onSearch}
 							className='form-control form-control-sm ml-3 w-75'
 							type='text'
@@ -144,7 +144,7 @@ class CommunityList extends Component {
 						/>
 					</form>
 				</MDBCol>
-                {/* if members exist populate community else do nothing */}
+				{/* if members exist populate community else do nothing */}
 				{this.props.members ? this.communityPopulate() : null}
 			</div>
 		);

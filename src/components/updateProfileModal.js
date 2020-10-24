@@ -29,11 +29,11 @@ class UpdateProfileModal extends Component {
       picture: this.props.user.picture,
       location: {
         address: "",
-        lat: this.props.user.location.lat,
-        lng: this.props.user.location.lng
+        lat: null,
+        lng: null
       },
       openProfileModal: false,
-      categories: []
+      categories: this.props.user.categories
 
     }
 
@@ -96,9 +96,7 @@ class UpdateProfileModal extends Component {
       location: this.state.location
     }
     this.props.updateProfile(profile);
-    this.setState({
-      categories: []
-    });
+
     this.toggleModal();
 
 
@@ -175,15 +173,20 @@ class UpdateProfileModal extends Component {
                   <form>
 
                     <div>
-                      {this.props.categories.map((category, index) => (
-                        <label className="" key={index}>
-                          <input className="mx-1" type="checkbox" onChange={this.onCheck}
-                            checked={this.props.user.categories.map(c => c === category ? true : false
-                            )}
-                            value={category} >
-                          </input>
-                          {category}
-                        </label>
+                      {this.props.categories.map((category, i) => (
+                        <button className="editBtn">
+                          <label className="" key={category + i}>
+                            <input className="mx-1" type="checkbox" onChange={this.onCheck}
+                              value={category}
+                              defaultChecked={
+                                this.state.categories.find(c => c === category)
+
+                              } >
+                            </input>
+
+                            {category}
+                          </label>
+                        </button>
                       ))}
                     </div>
                   </form>

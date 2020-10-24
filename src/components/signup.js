@@ -22,6 +22,7 @@ class SignUp extends Component {
       password: "",
       password2: "",
       errmsg: ""
+
     };
   }
   componentDidUpdate(prevProps) {

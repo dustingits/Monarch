@@ -82,13 +82,21 @@ class Profile extends React.Component {
 
                                             {this.props.active === 'user' ? this.props.user.following.length
                                                 :
-                                                this.props.member.following.length}
+                                                this.props.active === 'user' ? "0" : null}
+                                            {this.props.active === 'member' ? this.props.user.following.length
+                                                :
+                                                this.props.active === 'member' ? "0" : null
+                                            }
 
                                         </div>
                                         <div className="col follower">
                                             {this.props.active === 'user' ? this.props.user.followers.length
                                                 :
-                                                this.props.member.followers.length}
+                                                this.props.active === 'user' ? "0" : null}
+                                            {this.props.active === 'member' ? this.props.user.followers.length
+                                                :
+                                                this.props.active === 'member' ? "0" : null
+                                            }
                                         </div>
                                     </div>
                                     <div className="row">

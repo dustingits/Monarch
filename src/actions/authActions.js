@@ -51,12 +51,14 @@ export const signUpUser = ({ username, email, password }) => (
             })
         )
         .catch(err => {
-            dispatch(
-                returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-            );
-            dispatch({
-                type: 'REGISTER_FAIL'
-            });
+            if (err.response && err.response.data) {
+                dispatch(returnErrors(err.response.data, err.response.status));
+                dispatch({
+                    type: 'REGISTER_FAIL'
+                });
+            } else {
+                console.log(err);
+            }
         });
 };
 
