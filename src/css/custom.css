@@ -32,7 +32,6 @@ input:focus + label {
 
 input:focus {
 	border-bottom: 1px solid #2bbbad !important;
-	box-shadow: 0 1px 0 0 #2bbbad !important;
 	background-image: linear-gradient(
 		92.2deg,
 		rgba(31, 225, 225, 1) -15.9%,
@@ -41,6 +40,7 @@ input:focus {
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
+	box-shadow: 0;
 }
 textarea:focus {
 	border-bottom: 1px solid #1fe1e1 !important;
@@ -75,7 +75,7 @@ textarea:focus + label {
 	color: black !important;
 	background-image: radial-gradient(
 		circle farthest-corner at 10% 20%,
-		rgba(31, 225, 225, 1) 34.4%,
+		#1fe1e1 34.4%,
 		rgba(148, 119, 215, 1) 100.2%
 	);
 	border-radius: 0.125rem !important;
@@ -148,6 +148,15 @@ textarea:focus + label {
 	height: 13em;
 	width: 13em;
 }
+.avatar-md {
+	background-image: url(../imgs/default_photo.jpg);
+	background-size: contain;
+	min-height: 8em;
+	min-width: 8em;
+	max-height: 8em;
+	max-width: 8em;
+}
+
 .rounded-circle {
 	border-radius: 50% !important;
 	background-color: #5f5d5d;
@@ -155,6 +164,7 @@ textarea:focus + label {
 .card {
 	background-color: #242526;
 	border-radius: 1em;
+	max-width: 900px;
 }
 .tab-content {
 	padding: 0 !important;
@@ -739,11 +749,7 @@ ul.nav.nav-tabs {
 	font-size: 2em;
 	-webkit-text-stroke: 0.5px black;
 	font-family: 'Russo One', sans-serif;
-	background-image: linear-gradient(
-		0.2deg,
-		rgba(31, 225, 225, 1) -0.9%,
-		rgba(148, 119, 215, 1) 70.8%
-	);
+	background-image: linear-gradient(0.2deg, rgba(31, 225, 225, 1) -0.9%, #9477d7 70.8%);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -752,7 +758,192 @@ ul.nav.nav-tabs {
 .section2 {
 	box-shadow: 14px 0 13px -14px #000000;
 }
+.btn-secondary {
+	border-radius: 2em;
+	color: #fff;
+	background: linear-gradient(0deg, #242526 10%, rgba(0, 0, 0, 0.315) 80.4%) !important;
+}
 
+.btn-secondary:not([disabled]):not(.disabled):active,
+.btn-secondary:not([disabled]):not(.disabled).active,
+.show > .btn-secondary.dropdown-toggle {
+	background-image: linear-gradient(0.2deg, rgba(31, 225, 225, 1) -0.9%, #9477d7 70.8%) !important;
+	color: black !important;
+}
+.progress {
+	border-radius: 3em;
+}
+.progress-bar {
+	border-right: 1px solid black;
+	border-top-left-radius: 3em;
+	border-bottom-left-radius: 3em;
+	color: black;
+	background-image: linear-gradient(90deg, rgba(244, 89, 128, 1) 0%, #ff9472 90%);
+}
+.MuiInput-underline:after {
+	border-bottom: 2px solid #1fe1e1 !important;
+}
+.MuiInput-underline:before {
+	border-bottom-color: white !important;
+}
+
+.MuiIconButton-root {
+	color: #9477d7 !important;
+}
+.MuiPaper-root {
+	background-color: #242526 !important;
+	border: 1px solid white;
+	color: white !important;
+}
+.MuiPickersCalendarHeader-dayLabel {
+	color: white !important;
+}
+.MuiButton-textPrimary {
+	color: #1fe1e1 !important;
+}
+.MuiPickersCalendarHeader-iconButton {
+	z-index: 1;
+	background-color: #242526 !important;
+}
+.MuiPickersToolbarText-toolbarBtnSelected {
+	color: black !important;
+}
+.MuiPickersToolbarText-toolbarTxt {
+	color: black !important;
+}
+.MuiTypography-colorPrimary {
+	color: #1fe1e1 !important;
+}
+.MuiPickersDay-daySelected:hover {
+	background-color: #1fe1e1 !important;
+	color: white !important;
+}
+.MuiPickersDay-daySelected p {
+	color: black !important;
+}
+.MuiSlider-rail {
+	color: white;
+}
+.MuiSlider-track {
+	background-image: linear-gradient(
+		92.2deg,
+		rgba(31, 225, 225, 1) -15.9%,
+		rgba(148, 119, 215, 1) 80.8%
+	) !important;
+}
+.MuiSlider-thumb {
+	color: rgba(148, 119, 215, 1);
+}
+.MuiPickersToolbar-toolbar {
+	background-image: linear-gradient(
+		92.2deg,
+		rgba(31, 225, 225, 1) -0.9%,
+		rgba(148, 119, 215, 1) 80.8%
+	) !important;
+}
+
+.PrivateValueLabel-circle-4 {
+	background-image: linear-gradient(
+		45.2deg,
+		rgba(148, 119, 215, 1) -5.8%,
+		rgba(31, 225, 225, 1) 90.9%
+	) !important;
+}
+.PrivateValueLabel-label-5 {
+	color: #000 !important;
+	transform: rotate(45deg);
+}
+.icon {
+	font-size: 2.2em;
+	margin-right: 15px;
+}
+.multi-select-container {
+	margin-bottom: 2em;
+}
+.multi-select__value-container {
+	background-color: #5f5d5d;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+.multi-select__indicators {
+	background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.651) 12.9%, #000000 145.4%);
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+.multi-select__indicator-separator {
+	margin: 2px 0 !important;
+}
+.multi-select__control--is-focused {
+	border-color: black !important;
+	box-shadow: none !important;
+}
+.multi-select__menu {
+	color: white;
+	background-color: #5f5d5d !important;
+}
+.multi-select__multi-value__label {
+	border: 1px solid black;
+	border-radius: 2em !important;
+	padding: 5px 15px !important;
+	color: black !important;
+	background-image: linear-gradient(180deg, rgba(244, 89, 128, 1) 0%, #ff9472 90%);
+}
+.multi-select__option--is-focused {
+	background-image: linear-gradient(
+		45.2deg,
+		rgba(148, 119, 215, 1) -5.8%,
+		rgba(31, 225, 225, 1) 90.9%
+	) !important;
+}
+.multi-select__multi-value__remove:hover {
+	color: white !important;
+	background-color: transparent !important;
+}
+.multi-select__multi-value {
+	background-color: transparent !important;
+}
+#react-select-2-input:focus {
+	background: transparent;
+	color: white !important;
+	background-image: none !important;
+	border-bottom: 1px solid #2bbbad !important;
+	box-shadow: none !important;
+	-webkit-background-clip: none;
+	background-clip: none;
+	-webkit-text-fill-color: white;
+	box-shadow: 0;
+}
+#react-select-3-input:focus {
+	background: transparent;
+	color: white !important;
+	background-image: none !important;
+	border-bottom: 1px solid #2bbbad !important;
+	box-shadow: none !important;
+	-webkit-background-clip: none;
+	background-clip: none;
+	-webkit-text-fill-color: white;
+	box-shadow: 0;
+}
+.facebook {
+	color: #008cee;
+}
+.instagram {
+	background-image: linear-gradient(45.2deg, #f4b568 -5.8%, #a02ca4 90.9%);
+	-webkit-background-clip: text;
+	background-clip: text;
+
+	-webkit-text-fill-color: transparent;
+}
+.etsy {
+	color: #f26525;
+}
+.spotify {
+	color: #0dd769;
+}
+textarea.form-control {
+	background-color: #242526;
+	color: white;
+}
 @media only screen and (max-width: 600px) {
 	.profileThumb {
 		border-radius: 0;

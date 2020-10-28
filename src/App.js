@@ -13,11 +13,13 @@ import { loadUser } from './actions/authActions';
 import { loadCommunity } from './actions/userActions';
 import Landing from './components/landing';
 import store from './store';
+import MultiSignup from './components/multistepForm/multiStepSignup';
 class App extends Component {
   constructor(props) {
     super(props)
     store.dispatch(loadCommunity());
     store.dispatch(loadUser());
+    console.log(process.env.REACT_APP_GOOGLE_API);
 
   }
 
@@ -33,14 +35,14 @@ class App extends Component {
 
         <NavbarPage />
         <br />
-        <Route path="/" exact component={LogIn} />
+        <Route path="/" exact component={Landing} />
         <Route path="/createposts" component={CreatePosts} />
         <Route path="/edit/:id" component={EditPosts} />
         <Route path="/profile" component={Profile} />
         <Route path="/post/:id" component={Post} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={LogIn} />
-        <Route path="/landing" component={Landing} />
+        <Route path="/multisignup" component={MultiSignup} />
 
       </Router>
 

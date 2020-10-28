@@ -12,18 +12,21 @@ import store from './store';
 import en from 'javascript-time-ago/locale/en';
 import JavascriptTimeAgo from 'javascript-time-ago';
 import { LoadScript } from '@react-google-maps/api';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 JavascriptTimeAgo.addLocale(en);
 
 ReactDOM.render(
-	
-  <LoadScript googleMapsApiKey='AIzaSyDkxrc4-zLq4CB-Cig_XPj-rv50M3Javp4'>
-   <Provider store={store}>
-		
-			<App />
-  </Provider>
-  		</LoadScript>
-      ,
-	document.getElementById('root')
+
+  <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API}>
+    <Provider store={store}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <App />
+      </MuiPickersUtilsProvider>
+    </Provider>
+  </LoadScript>
+  ,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
